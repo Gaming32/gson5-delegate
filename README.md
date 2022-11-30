@@ -25,6 +25,11 @@ This is a simple library to bridge `gson` and `quilt-json5`.
     <version>1.0.2</version>
   </dependency>
   <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10</version>
+  </dependency>
+  <dependency>
     <groupId>io.github.gaming32</groupId>
     <artifactId>gson5-delegate</artifactId>
     <version>1.0.0</version>
@@ -46,6 +51,7 @@ repositories {
 
 dependencies {
     implementation "org.quiltmc:quilt-json5:1.0.2"
+    implementation "com.google.code.gson:gson:2.10"
     implementation "io.github.gaming32:gson5-delegate:1.0.0"
 }
 ```
@@ -60,6 +66,7 @@ repositories {
 
 dependencies {
     implementation("org.quiltmc:quilt-json5:1.0.2")
+    implementation("com.google.code.gson:gson:2.10")
     implementation("io.github.gaming32:gson5-delegate:1.0.0")
 }
 ```
