@@ -1,5 +1,6 @@
 plugins {
     java
+    `maven-publish`
 }
 
 group = "io.github.gaming32"
@@ -8,6 +9,18 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven("https://maven.quiltmc.org/repository/release")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "gaming32"
+            credentials(PasswordCredentials::class)
+
+            val baseUri = "https://maven.jemnetworks.com"
+            url = uri(baseUri + if (version.toString().endsWith("-SNAPSHOT")) "/snapshots" else "/releases")
+        }
+    }
 }
 
 dependencies {
