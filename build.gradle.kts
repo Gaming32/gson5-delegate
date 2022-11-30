@@ -1,5 +1,6 @@
 plugins {
     java
+    `java-library`
     `maven-publish`
 }
 
@@ -11,6 +12,11 @@ repositories {
     maven("https://maven.quiltmc.org/repository/release")
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     repositories {
         maven {
@@ -19,6 +25,16 @@ publishing {
 
             val baseUri = "https://maven.jemnetworks.com"
             url = uri(baseUri + if (version.toString().endsWith("-SNAPSHOT")) "/snapshots" else "/releases")
+        }
+    }
+
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+
+            from(components["java"])
         }
     }
 }
@@ -33,4 +49,10 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+    }
 }
